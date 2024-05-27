@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:56:06 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/27 22:40:37 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/27 23:11:49 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	hook_controls(t_data *data)
 	mlx_loop_hook(data->mlx_ptr, &handle_no_event, data);
 	mlx_hook(win, KeyPress, KeyPressMask, &handle_escape_press, data);
 	mlx_hook(win, DestroyNotify, KeyReleaseMask, &handle_destroy_notify, data);
+	printf_clr(GREEN_TXT, "Successfully exited fdf !\n");
 }

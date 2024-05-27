@@ -6,7 +6,7 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 21:20:18 by inazaria          #+#    #+#              #
-#    Updated: 2024/05/26 19:05:02 by inazaria         ###   ########.fr        #
+#    Updated: 2024/05/28 00:41:57 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ SRC_FILES_DRAWING	= $(addprefix $(SRC_DRAWING_DIR), $(C_FILES_DRAWING))
 SRC_EXIT_FDF_DIR	= ./src_exit_fdf/
 C_FILES_EXIT_FDF	= free_fdf.c
 C_FILES_EXIT_FDF	+= quit_fdf.c
+C_FILES_EXIT_FDF	+= error_printing.c
 SRC_FILES_EXIT_FDF	= $(addprefix $(SRC_EXIT_FDF_DIR), $(C_FILES_EXIT_FDF))
 
 SRC_UTILS_DIR		= ./src_utils/
-C_FILES_UTILS		= utils.c
+C_FILES_UTILS		= initializing_utils.c
 SRC_FILES_UTILS		= $(addprefix $(SRC_UTILS_DIR), $(C_FILES_UTILS))
 
 SRC_HOOKS_DIR		= ./src_hooks/

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_fdf.c                                         :+:      :+:    :+:   */
+/*   initializing_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 15:28:58 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/28 01:53:31 by inazaria         ###   ########.fr       */
+/*   Created: 2024/05/28 00:38:23 by inazaria          #+#    #+#             */
+/*   Updated: 2024/05/28 01:14:19 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdlib.h>
 
-void	free_map(t_data *data)
+void	bzero_img_addr(t_image *img)
 {
-	t_map	*map;
-
-	map = data->map;
-	free(map);
+	ft_bzero(img->addr, WIDTH * HEIGHT * (img->bits_per_pixel / 8));
 }
 
-void	free_fdf(t_data *data)
+void	bzero_t_data(t_data *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->img->image_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	free_map(data);
-	free(data->img);
+	data->img = NULL;
+	data->map = NULL;
+	data->mlx_ptr = NULL;
+	data->win_ptr = NULL;
+}
+
+void	bzero_t_map(t_map *map)
+{
+	map->height = 0;
+	map->width = 0;
+	map->points = NULL;
 }
