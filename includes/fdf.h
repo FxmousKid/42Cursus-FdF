@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/18 19:05:35 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/27 22:45:07 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,23 @@
 # include "../libft/include/libft.h"
 # include "../mlx_linux/mlx.h"
 # include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
-# define WIDTH 1920 / 2
-# define HEIGHT 1080 / 2
+# define WIDTH 1920
+# define HEIGHT 1080
+
+# define RED_TXT "\033[0;31m"
+# define GREEN_TXT "\033[0;32m"
+# define YELLOW_TXT "\033[0;33m"
+# define BLUE_TXT "\033[0;34m"
+# define BROWN_TXT "\033[0;35m"
+# define END_TXT "\033[0m"
+
+# define WHITE_ARGB 0x00FFFFFF
+# define RED_ARGB 0x00FF0000
+# define GREEN_ARGB 0x0000FF00
+# define BLUE_ARGB 0x000000FF
 
 typedef struct s_point
 {
@@ -27,6 +41,13 @@ typedef struct s_point
 	int		z;
 }				t_point;
 
+typedef struct s_map
+{
+	t_point		**points;
+	int			width;
+	int			height;
+}				t_map;
+
 typedef struct s_image
 {
 	void	*image_ptr;
@@ -34,13 +55,41 @@ typedef struct s_image
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian_type;
-}				t_image;
+}			t_image;
 
-void	ft_err(char *str);
-int		fil_de_fer(void);
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_image	*img;
+	t_map	*map;
+}			t_data;
+
+// Initializing Functions
+void	bzero_t_data(t_data *data);
+void	bzero_img_addr(t_image *img);
+int		make_t_data(t_data *data, char *argv[]);
+void	*make_t_image(t_data *data);
+t_map	*parse_map(t_data *data, char *argv[]);
+int		fil_de_fer(char *argv[]);
+
+// Drawing functions
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
-void	draw_on_image(t_image *img);
+void	draw_on_image(t_data *data);
 
+// Utils Functions
+void	ft_err(char *str);
 
+// Hooking Functions
+void	hook_controls(t_data *data);
+
+// Functions to manage cascading-frees / quits
+void	free_map(t_data *data);
+void	free_fdf(t_data *data);
+void	quit_mlx(t_data *data);
+void	quit_img(t_data *data, t_image *img);
+void	quit_win_mlx(t_data *data);
+void	quit_win_mlx_img(t_data	*data);
+void	quit_fdf(t_data *data);
 
 #endif

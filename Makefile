@@ -6,12 +6,39 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 21:20:18 by inazaria          #+#    #+#              #
-#    Updated: 2024/05/18 19:42:26 by inazaria         ###   ########.fr        #
+#    Updated: 2024/05/26 19:05:02 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+SRC_PASRING_DIR		= ./src_parsing/
+C_FILES_PARSING		= parse_map.c
+SRC_FILES_PARSING	= $(addprefix $(SRC_PASRING_DIR), $(C_FILES_PARSING))
 
-SRC_FILES	:= $(wildcard ./src/*.c)
+SRC_DRAWING_DIR		= ./src_drawing/
+C_FILES_DRAWING		= drawing.c
+C_FILES_DRAWING		+= drawing_utils.c
+SRC_FILES_DRAWING	= $(addprefix $(SRC_DRAWING_DIR), $(C_FILES_DRAWING))
+
+SRC_EXIT_FDF_DIR	= ./src_exit_fdf/
+C_FILES_EXIT_FDF	= free_fdf.c
+C_FILES_EXIT_FDF	+= quit_fdf.c
+SRC_FILES_EXIT_FDF	= $(addprefix $(SRC_EXIT_FDF_DIR), $(C_FILES_EXIT_FDF))
+
+SRC_UTILS_DIR		= ./src_utils/
+C_FILES_UTILS		= utils.c
+SRC_FILES_UTILS		= $(addprefix $(SRC_UTILS_DIR), $(C_FILES_UTILS))
+
+SRC_HOOKS_DIR		= ./src_hooks/
+C_FILES_HOOKS		= hooks.c
+SRC_FILES_HOOKS		= $(addprefix $(SRC_HOOKS_DIR), $(C_FILES_HOOKS))
+
+SRC_FILES   = fdf.c
+SRC_FILES  += $(SRC_FILES_PARSING)
+SRC_FILES  += $(SRC_FILES_DRAWING)
+SRC_FILES  += $(SRC_FILES_EXIT_FDF)
+SRC_FILES  += $(SRC_FILES_UTILS)
+SRC_FILES  += $(SRC_FILES_HOOKS)
+
 OBJ_FILES	:= $(SRC_FILES:.c=.o)
 
 NAME		:= fdf
@@ -21,7 +48,7 @@ LIBFT_DIR	:= ./libft/
 MLX_DIR		:= ./mlx_linux/
 CFLAGS	 	:= -Wall -Wextra -Werror -g3 -I$(INC_DIR)
 RM			:= rm -f
-
+CAT 		:= cat
 
 BLUE		:= $(shell echo -e "\033[34m") 
 YELLOW		:= $(shell echo -e "\033[33m")
@@ -31,7 +58,10 @@ END			:= $(shell echo -e "\033[0m")
 .c.o :
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all : $(NAME)
+all : display $(NAME)
+
+display : 
+	@$(CAT) ./REMDINDERS.TXT
 
 $(NAME) : $(OBJ_FILES) mlx libft
 	@$(CC) $(CFLAGS) $(OBJ_FILES) -Lmlx_linux -lmlx -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
@@ -53,7 +83,7 @@ clean :
 	@echo "$(YELLOW)Deleting mlx obj files...$(END)"
 	@$(MAKE) --no-print-directory -C ./mlx_linux clean
 	@echo "$(YELLOW)Deleting fdf obj files...$(END)"
-	@$(RM) $(OBJ)
+	@$(RM) $(OBJ_FILES)
 	@echo "$(GREEN)All obj files have been deleted !$(END)"
 
 fclean : 
@@ -63,7 +93,7 @@ fclean :
 	@echo "$(YELLOW)Deleting mlx library...$(END)"
 	@$(MAKE) --no-print-directory -C ./mlx_linux clean
 	@echo "$(YELLOW)Deleting fdf obj files...$(END)"
-	@$(RM) $(OBJ)
+	@$(RM) $(OBJ_FILES)
 	@echo "$(YELLOW)Deleting fdf library...$(END)"
 	@$(RM) $(NAME)
 	@echo "$(GREEN)All files have been deleted !$(END)"
