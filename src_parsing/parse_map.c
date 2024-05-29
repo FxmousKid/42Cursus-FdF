@@ -6,22 +6,13 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:26:18 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/29 01:31:47 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:59:14 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdlib.h>
 
-int	parse_points_from_lines(t_map *map, t_list *head)
-{
-	(void) map;
-
-	if (!file_format_check(head))
-		return (ft_err("File is not correctly formatted !\n"), 0);
-	
-	
-	return (1);
-}
 /* A line of the map file looks like this :
  * "x1,c1 x2,c2 x3,c3 ..."      <--- x_n is a int representing the z coordinate
  *					           	     c_n is a int representing the color

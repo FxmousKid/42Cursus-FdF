@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:32:10 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/29 01:57:11 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 00:18:22 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,16 @@
 
 int	check_line_content(char *line)
 {
-	int	i;
-
-	i = 0;
-	ft_printf("line = %s\n", line);
-	while (line[i])
+	int	nl_flag;
+	
+	nl_flag = has_ocurrence('\n', line);
+	while (line && *line)
 	{
-		if (!ft_isdigit(line[i]) &&
-			line[i] != ' ' &&
-			line[i] != 'x' &&
-			line[i] != 'X' &&
-			line[i] != ',' &&
-			line[i] != '\n' &&
-			(ft_strlen(line) != 1 && line[i] != '\n'))
-				return (ft_printf("line[%d] = '%c'", i, line[i]), 0);
-		i++;
+		if (!ft_isdigit(*line) && !has_ocurrence(*line, "xX, abcedf\n"))
+				return (0);
+		if (ft_strlen(line) == 1 && line[0] == '\n' && nl_flag == 0)
+				return (0);
+		line++;
 	}
 	return (1);
 }

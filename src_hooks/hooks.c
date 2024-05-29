@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:56:06 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/28 23:58:05 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 00:27:07 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int	handle_no_event(t_data *data)
 
 int	handle_escape_press(int keysym, t_data *data)
 {
-	printf_clr(RED_TXT, "Exiting fdf...\n");
 	if (keysym == XK_Escape)
+	{
+		printf_clr(RED_TXT, "Exiting fdf...\n");
 		free_fdf(data);
+	}
 	return (0);
 }
 
