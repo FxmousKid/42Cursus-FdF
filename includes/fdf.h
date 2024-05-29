@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/30 01:07:06 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 01:19:59 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ typedef struct s_data
 // Parsing Functions
 int		file_format_check(t_list *head);
 int		parse_points_from_lines(t_map *map, t_list *head);
+int		is_z_good(char *str);
+void	free_z_and_color(char **z_and_color);
+void	assign_to_arr(int tab[2], int a, int b);
 
 // Initializing Functions
 void	bzero_t_data(t_data *data);
@@ -97,10 +100,8 @@ void	draw_on_image(t_data *data);
 
 // Utils Functions
 void	ft_err(char *str);
-void	assign_to_arr(int tab[2], int a, int b);
 void	print_exit_invalid_argc(void);
 int		has_ocurrence(char c, char *charset);
-void	free_z_and_color(char **z_and_color);
 int		count_occ(char *str, char c);
 void	free_split(char **split);
 void	print_point_info(t_point *point);

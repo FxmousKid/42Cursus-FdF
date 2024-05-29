@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:54:24 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/30 01:03:56 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 01:34:33 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	handle_color_and_z_value(t_point **point, char *vals)
 	long long	z_value;
 	long long	color;
 
-	if (count_occ(vals, ',') > 1)
-		return (ft_err("too many ',', badly formatted\n"), 0);
+	if (count_occ(vals, ',') > 1 || !is_z_good(vals))
+		return (ft_err("File is badly formatted !\n"), 0);
 	z_and_color = ft_split(vals, ',');
 	(*point)->color = 0x00FFFFFF;
 	if (z_and_color == NULL)
@@ -55,27 +55,26 @@ int	alloc_point_in_array(t_point **point, char *vals, int x_y[2], int height)
 
 int	create_points_in_array(t_map *map, t_list *head, t_point ***points)
 {
-	int		i;
-	int		j;
+	int		i_j[2];
 	int		x_y[2];
 	char	**line_split;
 
-	i = 0;
-	while (i < map->height && head)
+	i_j[0] = 0;
+	while (i_j[0] < map->height && head)
 	{
-		j = 0;
+		i_j[1] = 0;
 		line_split = ft_split(head->content, ' ');
 		if (line_split == NULL)
 			return (ft_err("Failed to split line\n"), 0);
-		while (j < map->width)
+		while (i_j[1] < map->width)
 		{
-			assign_to_arr(x_y, j, i);
-			if (!alloc_point_in_array(&(points[i][j]),
-				line_split[j], x_y, map->height))
+			assign_to_arr(x_y, i_j[1], i_j[0]);
+			if (!alloc_point_in_array(&(points[i_j[0]][i_j[1]]),
+				line_split[i_j[1]], x_y, map->height))
 				return (ft_err("Failed to alloc_point_in_array()\n"), 0);
-			j++;
+			(i_j[1])++;
 		}
-		i++;
+		(i_j[0])++;
 		free_split(line_split);
 		head = head->next;
 	}
