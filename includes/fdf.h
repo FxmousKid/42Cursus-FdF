@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/28 01:16:54 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/29 01:31:33 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ typedef struct s_data
 	t_image	*img;
 	t_map	*map;
 }			t_data;
+
+// Parsing Functions
+int	file_format_check(t_list *head);
 
 // Initializing Functions
 void	bzero_t_data(t_data *data);
