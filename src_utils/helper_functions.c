@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 19:15:17 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/29 23:45:27 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 00:51:43 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,10 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+}
+
+void	assign_to_arr(int tab[2], int a, int b)
+{
+	tab[0] = a;
+	tab[1] = b;
 }

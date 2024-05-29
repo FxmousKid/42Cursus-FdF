@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/29 23:46:45 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 01:07:06 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
-# define WIDTH	1920 / 2
-# define HEIGHT	1080 / 2
+# define WIDTH	960
+# define HEIGHT	540
 
 # define RED_TXT		"\e[0;31m"
 # define GREEN_TXT		"\e[0;32m"
@@ -45,7 +45,7 @@
 # define BLUE_ARGB	0x000000FF
 # define COLOR_MAX  0xFFFFFFFF
 
-typedef struct	s_point
+typedef struct s_point
 {
 	int			x;
 	int			y;
@@ -80,7 +80,6 @@ typedef struct s_data
 // Parsing Functions
 int		file_format_check(t_list *head);
 int		parse_points_from_lines(t_map *map, t_list *head);
-int		alloc_array_of_points(t_map *map, t_list *head, t_point ***points);
 
 // Initializing Functions
 void	bzero_t_data(t_data *data);
@@ -98,6 +97,7 @@ void	draw_on_image(t_data *data);
 
 // Utils Functions
 void	ft_err(char *str);
+void	assign_to_arr(int tab[2], int a, int b);
 void	print_exit_invalid_argc(void);
 int		has_ocurrence(char c, char *charset);
 void	free_z_and_color(char **z_and_color);
@@ -110,7 +110,7 @@ void	print_map_points(t_map *map);
 void	hook_controls(t_data *data);
 
 // Functions to manage cascading-frees / quits
-void	free_map(t_data *);
+void	free_map(t_data *data);
 void	free_points(t_map *map);
 void	free_points_array(t_map *map);
 void	free_fdf(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:46:16 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/29 17:13:41 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 00:59:57 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	make_t_image(t_data *data)
 			&(img->line_length),
 			&(img->endian_type));
 	if (!(img->addr))
-		return (quit_img(data, img), 
-				ft_err("Failed to mlx_get_data_addr()\n"), 0);
+		return (quit_img(data, img),
+			ft_err("Failed to mlx_get_data_addr()\n"), 0);
 	data->img = img;
 	return (1);
 }
@@ -76,7 +76,6 @@ int	fil_de_fer(char *argv[])
 
 int	main(int argc, char *argv[])
 {
-
 	if (argc != 2)
 	{
 		print_exit_invalid_argc();

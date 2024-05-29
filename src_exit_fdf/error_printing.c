@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:34:42 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/28 15:03:22 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 01:00:16 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_err(char *str)
 void	print_exit_invalid_argc(void)
 {
 	ft_printf("Invalid use of fdf.\n");
-	ft_printf("Usage:"); 
+	ft_printf("Usage:");
 	printf_clr(YELLOW_TXT, " ./fdf <path/to/map.fdf>\n");
 	printf_clr(BOLD_TXT, "\nExited with code : ");
 	printf_clr(RED_TXT, "1\n");
