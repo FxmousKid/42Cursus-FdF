@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 16:56:06 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/30 01:00:38 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:21:12 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	handle_no_event(t_data *data)
 	return (0);
 }
 
-int	handle_escape_press(int keysym, t_data *data)
+int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 	{
@@ -42,6 +42,6 @@ void	hook_controls(t_data *data)
 
 	win = data->win_ptr;
 	mlx_loop_hook(data->mlx_ptr, &handle_no_event, data);
-	mlx_hook(win, KeyPress, KeyPressMask, &handle_escape_press, data);
+	mlx_hook(win, KeyPress, KeyPressMask, handle_keypress, data);
 	mlx_hook(win, DestroyNotify, KeyReleaseMask, &handle_destroy_notify, data);
 }

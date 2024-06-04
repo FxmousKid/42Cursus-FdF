@@ -6,7 +6,7 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 21:20:18 by inazaria          #+#    #+#              #
-#    Updated: 2024/05/30 01:20:26 by inazaria         ###   ########.fr        #
+#    Updated: 2024/06/01 19:46:32 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,16 @@ SRC_FILES_PARSING	= $(addprefix $(SRC_PASRING_DIR), $(C_FILES_PARSING))
 SRC_DRAWING_DIR		= ./src_drawing/
 C_FILES_DRAWING		= drawing.c
 C_FILES_DRAWING		+= drawing_utils.c
+C_FILES_DRAWING		+= rotation_matrixes.c
+C_FILES_DRAWING		+= isometric_projection.c
 SRC_FILES_DRAWING	= $(addprefix $(SRC_DRAWING_DIR), $(C_FILES_DRAWING))
+
+SRC_XIAOLIN_WU_DIR		= ./src_drawing/xiaolin_wu/
+C_FILES_XIAOLIN_WU		= xiaolin_wu.c
+C_FILES_XIAOLIN_WU		+= wu_utils.c
+C_FILES_XIAOLIN_WU		+= swap_wu_values.c
+C_FILES_XIAOLIN_WU		+= re_initialize_wu_values.c
+SRC_FILES_XIAOLIN_WU	= $(addprefix $(SRC_XIAOLIN_WU_DIR), $(C_FILES_XIAOLIN_WU))
 
 SRC_EXIT_FDF_DIR	= ./src_exit_fdf/
 C_FILES_EXIT_FDF	= free_fdf.c
@@ -44,6 +53,7 @@ SRC_FILES  += $(SRC_FILES_DRAWING)
 SRC_FILES  += $(SRC_FILES_EXIT_FDF)
 SRC_FILES  += $(SRC_FILES_UTILS)
 SRC_FILES  += $(SRC_FILES_HOOKS)
+SRC_FILES  += $(SRC_FILES_XIAOLIN_WU)
 
 OBJ_FILES	:= $(SRC_FILES:.c=.o)
 

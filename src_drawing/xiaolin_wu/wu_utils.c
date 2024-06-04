@@ -1,30 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_points_utils.c                             :+:      :+:    :+:   */
+/*   wu_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 01:16:25 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/30 16:55:39 by inazaria         ###   ########.fr       */
+/*   Created: 2024/05/30 15:42:48 by inazaria          #+#    #+#             */
+/*   Updated: 2024/06/04 21:15:33 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	is_z_good(char *str)
+int	ipart(int x)
 {
-	while (str && *str && *str != ',')
-	{
-		if (!ft_isdigit(*str) && *str != '\n' && *str != '-')
-			return (0);
-		str++;
-	}
-	return (1);
+	return (floor(x));
 }
 
-void	assign_z_and_wu_z(t_point **point, long long z_value)
+float	my_round(int x)
 {
-	(*point)->z = z_value;
-	(*point)->wu_z = z_value;
+	return (ipart(x + 0.5));
+}
+
+float	fpart(float x)
+{
+	if (x < 0)
+		return (1 - (x - floor(x)));
+	return (x - floor(x));
+}
+
+float	rfpart(float x)
+{
+	return (1 - fpart(x));
+}
+
+void	draw_pixel_w_brightness(int x, int y, float brightness, t_data *data)
+{
+	int		color;
+	t_image	*img;
+
+	img = data->img;
+	color = 255 * brightness;
+	my_mlx_pixel_put(img, x, y, color);
 }

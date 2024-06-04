@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:26:18 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/30 00:48:01 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:13:02 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	make_t_map(t_data *data, char *argv[])
 	if (fd < 0)
 		return (free(map), ft_err("Failed to open file\n"), 0);
 	if (!parse_map(data, map, fd))
-		return (free(map), ft_err("Failed to parse_map()\n"), 0);
+		return (free(map), ft_err("Failed to parse_map()\n"), close(fd), 0);
 	data->map = map;
+	close(fd);
 	return (1);
 }
