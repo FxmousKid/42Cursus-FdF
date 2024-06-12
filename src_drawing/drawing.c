@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:03:12 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/04 21:21:44 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/12 03:40:11 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,60 @@ void	draw_red_cross(t_data *data)
 		my_mlx_pixel_put(img, WIDTH / 2, pixel_y++, RED_ARGB);
 }
 
-void	test_line_drawing(t_data *data)
+void	set_isometric_coords(t_point *point, int height, int width)
 {
-	t_point		*p0;
-	t_point		*p1;
+	int	previous_wu_x;
+	int	previous_wu_y;
 
-	p0 = (t_point *)malloc(sizeof(t_point));
-	p1 = (t_point *)malloc(sizeof(t_point));
+	previous_wu_x = point->wu_x;
+	previous_wu_y = point->wu_y;
+	point->wu_x = (previous_wu_x - previous_wu_y) * cos(ANGLE);
+	point->wu_y = (previous_wu_x + previous_wu_y) * sin(ANGLE) - point->z;
 
-	p0->x = 100;
-	p0->y = 100;
-	p0->wu_x = 100;
-	p0->wu_y = 100;
+	(void)height;
+	(void)width;
 
-	p1->x = 400;
-	p1->y = 400;
-	p1->wu_x = 400;
-	p1->wu_y = 400;
+	point->wu_x += WIDTH / 2;
+	//point->wu_x += (width / 2) + (WIDTH / 2);
+	//point->wu_y += (height / 2);
 
-	draw_AA_line(data, p0, p1);
-	free(p0);
-	free(p1);
+}
+
+
+void	draw_map(t_data *data)
+{
+	int		i;
+	int		j;
+	t_point	*p0;
+	t_point	*p1;
+	t_point	*p2;
+
+	i = data->map->height - 1;
+	while (i > 0)
+	{
+		j = data->map->width - 1;
+		while (j > 0)
+		{
+			p0 = data->map->points[i][j];
+			if (j - 1 > 0)
+			{
+				p1 = data->map->points[i][j - 1];
+				draw_AA_line_isometric(data, p0, p1);
+			}
+			if (i - 1 > 0)
+			{
+				p2 = data->map->points[i - 1][j];
+				draw_AA_line_isometric(data, p0, p2);
+			}
+			j--;
+		}
+		i--;
+	}
+}
+
+void	draw_on_image(t_data *data)
+{
+	draw_map(data);
+	//print_map_points(data->map);
+	//draw_first_row(data, data->map->points);	
 }

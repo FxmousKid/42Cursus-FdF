@@ -6,17 +6,18 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:54:24 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/30 16:55:32 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/12 03:06:04 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <math.h>
 
 int	handle_color_and_z_value(t_point **point, char *vals)
 {
 	char		**z_and_color;
-	long long	z_value;
-	long long	color;
+	int			z_value;
+	int			color;
 
 	if (count_occ(vals, ',') > 1 || !is_z_good(vals))
 		return (ft_err("File is badly formatted !\n"), 0);
@@ -32,7 +33,7 @@ int	handle_color_and_z_value(t_point **point, char *vals)
 	if (ft_strchr(vals, ','))
 	{
 		color = ft_atoi_base_long(z_and_color[1] + 2, "0123456789abcdef");
-		if (color < 0 || color > COLOR_MAX)
+		if (color < 0) //|| color > COLOR_MAX)
 			return (free_split(z_and_color), ft_err("Color not formated\n"), 0);
 		(*point)->color = color;
 	}
@@ -41,14 +42,30 @@ int	handle_color_and_z_value(t_point **point, char *vals)
 
 int	alloc_point_in_array(t_point **point, char *vals, int x_y[2], int height)
 {
+	(void)	height;
 	*point = (t_point *) ft_calloc(sizeof(t_point), 1);
 	if (point == NULL)
 		return (ft_err("Failed to calloc *t_point\n"), 0);
-	(*point)->x = x_y[0];
-	(*point)->wu_x = x_y[0];
-	(*point)->y = height - x_y[1] - 1;
-	(*point)->wu_y = height - x_y[1] - 1;
 
+	(*point)->x = OFFSET + x_y[0] * SCALE;
+	(*point)->y = OFFSET + x_y[1] * SCALE;
+	//(*point)->y = OFFSET + (height - 1 - x_y[1]) * SCALE;
+	
+	(*point)->wu_x = (*point)->x;
+	(*point)->wu_y = (*point)->y;
+	/*
+	if (x_y[0] == 0)
+		(*point)->x = 0;
+	else
+		(*point)->x = x_y[0];
+	(*point)->wu_x = (*point)->x;
+	if (x_y[1] == 0)
+		(*point)->y = (height - 1);
+	else
+		(*point)->y = (height - 1 - x_y[1]);
+	(*point)->wu_y = (*point)->y;
+	*/	
+	
 	if (!handle_color_and_z_value(point, vals))
 		return (ft_err("Failed to handle_color_in_point()\n"), 0);
 	return (1);
@@ -113,5 +130,6 @@ int	parse_points_from_lines(t_map *map, t_list *head)
 		return (ft_err("Failed to calloc ***t_points\n"), 0);
 	if (!alloc_array_of_points(map, head, map->points))
 		return (ft_err("Failed to alloc_array_of_points()\n"), 0);
+	//reverse_t_points_row(map);
 	return (1);
 }

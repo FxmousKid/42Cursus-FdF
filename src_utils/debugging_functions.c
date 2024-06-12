@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:44:31 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/03 17:05:18 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:47:55 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	print_point_info(t_point *point)
 		return ;
 	}
 	ft_printf("Point : x    = %d, y    = %d, z    = %d, color = %x",
-		point->x,
-		point->y,
-		point->z,
+		(int) point->x,
+		(int) point->y,
+		(int) point->z,
 		point->color);
 }
 
@@ -55,6 +55,7 @@ void	print_map_points(t_map *map)
 			ft_printf("\n");
 			j++;
 		}
+		ft_printf("\n");
 		i++;
 	}
 }

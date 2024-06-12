@@ -6,12 +6,31 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:46:16 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/04 21:21:03 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/12 02:07:43 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft/include/libft.h"
 #include "mlx_linux/mlx.h"
+
+int	make_t_map(t_data *data, char *argv[])
+{
+	t_map	*map;
+	int		fd;
+
+	map = (t_map *) ft_calloc(sizeof(t_map), 1);
+	if (!map)
+		return (ft_err("Failed to calloc t_map\n"), 0);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (free(map), ft_err("Failed to open file\n"), 0);
+	if (!parse_map(data, map, fd))
+		return (free(map), ft_err("Failed to parse_map()\n"), close(fd), 0);
+	data->map = map;
+	close(fd);
+	return (1);
+}
 
 int	make_t_image(t_data *data)
 {
@@ -62,7 +81,9 @@ int	fil_de_fer(char *argv[])
 		return (ft_err("Failed to calloc t_data\n"), 0);
 	if (!make_t_data(data, argv))
 		return (ft_err("Failed to make_t_data()\n"), 0);
-	draw_on_image(data); // add safety check
+	
+	draw_on_image(data); // add safety check	
+	
 	mlx_put_image_status = mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->img->image_ptr, 0, 0);
 	if (!mlx_put_image_status)

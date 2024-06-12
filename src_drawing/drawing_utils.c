@@ -6,11 +6,23 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:06:02 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/04 20:59:11 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/08 23:53:57 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	change_t_point_coords(t_point *point, int x, int y, int z)
+{
+	//bzero_t_point(point);
+	point->x = x;
+	point->y = y;
+	point->z = z;
+	point->wu_x = x;
+	point->wu_y = y;
+	point->wu_z = z;
+	point->color = 0xFFFFFF;
+}
 
 void	change_background_color(t_image *img, int color)
 {

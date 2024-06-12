@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/04 21:40:05 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/12 03:06:41 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,23 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
-# define WIDTH	960
-# define HEIGHT	540
+# define WIDTH	1920
+# define HEIGHT	1080
+
 # ifndef ANGLE
-#  define ANGLE (M_PI / 4)
+#  define ANGLE (M_PI / 6)
+# endif
+
+# ifndef SCALE
+#  define SCALE 40
+# endif
+
+# ifndef OFFSET
+#  define OFFSET 100
+# endif
+
+# ifndef Z_SCALE
+#  define Z_SCALE 3
 # endif
 
 # define RED_TXT		"\e[0;31m"
@@ -85,11 +98,13 @@ typedef struct s_data
 }			t_data;
 
 // Parsing Functions
+int		parse_map(t_data *data, t_map *map, int fd);
 int		file_format_check(t_list *head);
 int		parse_points_from_lines(t_map *map, t_list *head);
 int		is_z_good(char *str);
 void	assign_to_arr(int tab[2], int a, int b);
 void	assign_z_and_wu_z(t_point **point, long long z_value);
+void	reverse_t_points_row(t_map *map);
 
 // Initializing Functions
 void	bzero_t_data(t_data *data);
@@ -106,6 +121,7 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	draw_on_image(t_data *data);
 void	change_background_color(t_image *img, int color);
 void	draw_pixel_w_brightness(int x, int y, float brightness, t_data *data);
+void	set_isometric_coords(t_point *point, int height, int width);
 
 // Rotation & translation functions
 void	create_matrix_rotation_x(float matrix[3][3], int angle);
@@ -123,6 +139,7 @@ void	swap_wu_y(t_point *a, t_point *b);
 void	swap_wu_x_with_y(t_point *a, t_point *b);
 void	swap_wu_y_with_x(t_point *a, t_point *b);
 void	draw_AA_line(t_data *data, t_point *p0, t_point *p1);
+void	draw_AA_line_isometric(t_data *data, t_point *p0, t_point *p1);
 
 // Utils Functions
 void	ft_err(char *str);
@@ -130,6 +147,7 @@ void	print_exit_invalid_argc(void);
 int		has_ocurrence(char c, char *charset);
 int		count_occ(char *str, char c);
 void	swap(void *a, void *b);
+void	change_t_point_coords(t_point *point, int x, int y, int z);
 void	free_split(char **split);
 void	print_point_info(t_point *point);
 void	print_point_wu_info(t_point *point);

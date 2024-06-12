@@ -1,4 +1,4 @@
-	[submodule "libft"]
+[submodule "libft"]
 	path = libft
 	url = https://github.com/FxmousKid/42Cursus-libft.git
 	branch = uptodate
