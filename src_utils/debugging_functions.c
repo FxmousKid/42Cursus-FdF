@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:44:31 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/11 19:47:55 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/13 01:20:49 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_point_info(t_point *point)
 		ft_printf("Point is NULL\n");
 		return ;
 	}
-	ft_printf("Point : x    = %d, y    = %d, z    = %d, color = %x",
+	ft_printf("Point : x    = %d, y    = %d, z    = %d, color = %ud",
 		(int) point->x,
 		(int) point->y,
 		(int) point->z,

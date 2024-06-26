@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/12 03:06:41 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:40:23 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,13 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
-# define WIDTH	1920
+# define WIDTH  1920
 # define HEIGHT	1080
 
-# ifndef ANGLE
-#  define ANGLE (M_PI / 6)
-# endif
-
-# ifndef SCALE
-#  define SCALE 40
-# endif
-
-# ifndef OFFSET
-#  define OFFSET 100
-# endif
-
-# ifndef Z_SCALE
-#  define Z_SCALE 3
-# endif
+# define ANGLE (M_PI / 6)
+# define SCALE 1
+# define OFFSET 1
+# define Z_SCALE 1
 
 # define RED_TXT		"\e[0;31m"
 # define GREEN_TXT		"\e[0;32m"
@@ -64,12 +53,12 @@
 
 typedef struct s_point
 {
-	double		x;
-	double		wu_x;
-	double		y;
-	double		wu_y;
-	double		z;
-	double		wu_z;
+	int			x;
+	int			wu_x;
+	int			y;
+	int			wu_y;
+	int			z;
+	int			wu_z;
 	size_t		color;
 }				t_point;
 
@@ -103,7 +92,7 @@ int		file_format_check(t_list *head);
 int		parse_points_from_lines(t_map *map, t_list *head);
 int		is_z_good(char *str);
 void	assign_to_arr(int tab[2], int a, int b);
-void	assign_z_and_wu_z(t_point **point, long long z_value);
+void	assign_z_and_wu_z(t_point **point, int z_value);
 void	reverse_t_points_row(t_map *map);
 
 // Initializing Functions

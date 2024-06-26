@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:54:24 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/12 03:06:04 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:55:02 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	alloc_point_in_array(t_point **point, char *vals, int x_y[2], int height)
 	if (point == NULL)
 		return (ft_err("Failed to calloc *t_point\n"), 0);
 
-	(*point)->x = OFFSET + x_y[0] * SCALE;
-	(*point)->y = OFFSET + x_y[1] * SCALE;
+	(*point)->x = OFFSET + x_y[0];
+	(*point)->y = OFFSET + x_y[1];
 	//(*point)->y = OFFSET + (height - 1 - x_y[1]) * SCALE;
 	
 	(*point)->wu_x = (*point)->x;

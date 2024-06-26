@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:48:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/12 03:01:18 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:44:41 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	draw_AA_line(t_data *data, t_point *p0, t_point *p1)
 
 void	draw_AA_line_isometric(t_data *data, t_point *p0, t_point *p1)
 {
-	set_isometric_coords(p0, data->map->height, data->map->width);
-	set_isometric_coords(p1, data->map->height, data->map->width);
+	//set_isometric_coords(p0, data->map->height, data->map->width);
+	//set_isometric_coords(p1, data->map->height, data->map->width);
 	draw_AA_line(data, p0, p1);
 }

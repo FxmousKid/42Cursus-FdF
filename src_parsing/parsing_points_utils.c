@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:16:25 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/12 01:47:12 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/13 01:26:33 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int	is_z_good(char *str)
 	return (1);
 }
 
-void	assign_z_and_wu_z(t_point **point, long long z_value)
+void	assign_z_and_wu_z(t_point **point, int z_value)
 {
 	(*point)->z = ((int) z_value) * Z_SCALE;
+	
 	(*point)->wu_z = (*point)->z;
 }
 

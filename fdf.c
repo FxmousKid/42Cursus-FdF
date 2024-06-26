@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:46:16 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/12 02:07:43 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:41:29 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ int	fil_de_fer(char *argv[])
 		return (ft_err("Failed to make_t_data()\n"), 0);
 	
 	draw_on_image(data); // add safety check	
+//	print_map_points(data->map);
 	
+
 	mlx_put_image_status = mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->img->image_ptr, 0, 0);
 	if (!mlx_put_image_status)
