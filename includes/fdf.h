@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/18 19:40:23 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/29 00:53:12 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
+# define BASE_16_LOWER "0123456789abcdef"
+
 # define WIDTH  1920
 # define HEIGHT	1080
 
-# define ANGLE (M_PI / 6)
-# define SCALE 1
-# define OFFSET 1
-# define Z_SCALE 1
+# define SCALE 40
+# define OFFSET 100
+# define Z_SCALE 5
 
 # define RED_TXT		"\e[0;31m"
 # define GREEN_TXT		"\e[0;32m"
@@ -86,13 +87,20 @@ typedef struct s_data
 	t_map	*map;
 }			t_data;
 
-// Parsing Functions
-int		parse_map(t_data *data, t_map *map, int fd);
+/*
+// OLD Parsing Functions
+int		parse_map(t_map *map, int fd);
 int		file_format_check(t_list *head);
 int		parse_points_from_lines(t_map *map, t_list *head);
 int		is_z_good(char *str);
 void	assign_to_arr(int tab[2], int a, int b);
 void	assign_z_and_wu_z(t_point **point, int z_value);
+*/
+
+
+// NEW Parsing Functions
+int		parse_map(t_map *map, char *filepath);
+int		parse_points(t_map *map, char *filepath);
 void	reverse_t_points_row(t_map *map);
 
 // Initializing Functions
@@ -137,8 +145,8 @@ int		has_ocurrence(char c, char *charset);
 int		count_occ(char *str, char c);
 void	swap(void *a, void *b);
 void	change_t_point_coords(t_point *point, int x, int y, int z);
-void	free_split(char **split);
 void	print_point_info(t_point *point);
+void	free_split(void **split);
 void	print_point_wu_info(t_point *point);
 void	print_map_with_wu_point(t_map *map);
 void	print_map_points(t_map *map);

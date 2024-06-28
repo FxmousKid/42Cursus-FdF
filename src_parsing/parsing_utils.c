@@ -1,57 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper_functions.c                                 :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 19:15:17 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/27 16:06:44 by inazaria         ###   ########.fr       */
+/*   Created: 2024/06/28 04:35:03 by inazaria          #+#    #+#             */
+/*   Updated: 2024/06/29 00:50:57 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	has_ocurrence(char c, char *charset)
+void	reverse_t_points_row(t_map *map)
 {
-	while (*charset)
-	{
-		if (*charset == c)
-			return (1);
-		charset++;
-	}
-	return (0);
-}
+	int		i;
+	int		height;
+	t_point	**tmp_row;
+	t_point	***points;
 
-int	count_occ(char *str, char c)
-{
-	int	count;
-
-	count = 0;
-	while (*str)
-	{
-		if (*str == c)
-			count++;
-		str++;
-	}
-	return (count);
-}
-
-void	free_split(void **split)
-{
-	int	i;
-
+	points = map->points;
 	i = 0;
-	while (split[i])
+	height = map->height;
+	while (i < height)
 	{
-		free(split[i]);
+		tmp_row = points[i];
+		points[i] = points[height - 1];
+		points[height - 1] = tmp_row;
 		i++;
-	}
-	free(split);
-}
-
-void	assign_to_arr(int tab[2], int a, int b)
-{
-	tab[0] = a;
-	tab[1] = b;
+		height--;
+	}	
 }

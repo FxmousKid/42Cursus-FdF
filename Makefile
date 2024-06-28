@@ -6,16 +6,17 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 21:20:18 by inazaria          #+#    #+#              #
-#    Updated: 2024/06/01 19:46:32 by inazaria         ###   ########.fr        #
+#    Updated: 2024/06/29 00:53:10 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PASRING_DIR		= ./src_parsing/
 C_FILES_PARSING		= parse_map.c
-C_FILES_PARSING		+= checking_t_list_content.c
-C_FILES_PARSING		+= parsing_points_utils.c
-C_FILES_PARSING		+= parsing_points.c
+C_FILES_PARSING		+= parsing_utils.c
+C_FILES_PARSING		+= parse_points.c
 SRC_FILES_PARSING	= $(addprefix $(SRC_PASRING_DIR), $(C_FILES_PARSING))
+
+    
 
 SRC_DRAWING_DIR		= ./src_drawing/
 C_FILES_DRAWING		= drawing.c

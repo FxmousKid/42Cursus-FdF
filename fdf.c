@@ -6,29 +6,25 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:46:16 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/18 19:41:29 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/29 00:10:21 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft/include/libft.h"
-#include "mlx_linux/mlx.h"
 
-int	make_t_map(t_data *data, char *argv[])
+int	make_t_map(t_data *data, char **argv)
 {
 	t_map	*map;
-	int		fd;
-
+	
 	map = (t_map *) ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		return (ft_err("Failed to calloc t_map\n"), 0);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (free(map), ft_err("Failed to open file\n"), 0);
-	if (!parse_map(data, map, fd))
-		return (free(map), ft_err("Failed to parse_map()\n"), close(fd), 0);
+	if (!parse_map(map, argv[1]))
+		return (free(map), ft_err("Failed to parse_map()\n"), 0);
 	data->map = map;
-	close(fd);
+
+	reverse_t_points_row(map);
+
 	return (1);
 }
 

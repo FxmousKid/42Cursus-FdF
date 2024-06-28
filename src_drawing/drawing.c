@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:03:12 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/18 19:43:37 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/29 00:31:39 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,21 @@ void	draw_red_cross(t_data *data)
 
 void	set_isometric_coords(t_point *point, int height, int width)
 {
-	int	previous_wu_x;
-	int	previous_wu_y;
+	int		previous_wu_x;
+	int		previous_wu_y;
+	double	angle;
+
+	angle = 0.523599;
+
 
 	previous_wu_x = point->wu_x;
 	previous_wu_y = point->wu_y;
-	point->wu_x = (previous_wu_x - previous_wu_y) * cos(ANGLE);
-	point->wu_y = (previous_wu_x + previous_wu_y) * sin(ANGLE) - point->wu_z;
+	point->wu_x = (previous_wu_x - previous_wu_y) * cos(angle);
+	point->wu_y = (previous_wu_x + previous_wu_y) * sin(angle) - point->wu_z;
 
 	(void) height;
 	(void) width;
-	//point->wu_x += (width / 2) + (WIDTH / 2);
+	point->wu_x += (width / 2) + (WIDTH / 2);
 	//point->wu_y += (height / 2);
 
 }
@@ -50,60 +54,40 @@ void	draw_map(t_data *data)
 {
 	int		i;
 	int		j;
+	t_point	***points;
 	t_point	*p0;
 	t_point	*p1;
 	t_point	*p2;
 
-
-	i = data->map->height - 1;
-	while (i > 0)
-	{
-		j = data->map->width - 1;
-		while (j > 0)
-		{
-			p0 = data->map->points[i][j];
-			if (j - 1 > 0)
-			{
-
-				p1 = data->map->points[i][j - 1];
-				draw_AA_line_isometric(data, p0, p1);
-			}
-			if (i - 1 > 0)
-			{
-				p2 = data->map->points[i - 1][j];
-				draw_AA_line_isometric(data, p0, p2);
-			}
-			j--;
-		}
-		i--;
-	}
-	/*	
 	i = 0;
-	while (i < data->map->height)
+	points = data->map->points;
+	while (points[i])
 	{
 		j = 0;
-		while (j < data->map->width)
+		while (points[i][j])
 		{
-			p0 = data->map->points[i][j];
-			if (j + 1 < data->map->width)
+			p0 = points[i][j];
+			if (points[i][j + 1])
 			{
 				p1 = data->map->points[i][j + 1];
 				draw_AA_line_isometric(data, p0, p1);
 			}
-			if (i + 1 < data->map->height)
+			if (points[i + 1] && points[i + 1][j])
 			{
 				p2 = data->map->points[i + 1][j];
 				draw_AA_line_isometric(data, p0, p2);
 			}
-			j--;
+			j++;
 		}
-		i--;
-	}*/
+		i++;
+	}
 }
 
 void	draw_on_image(t_data *data)
 {
 	//print_map_points(data->map);
+	draw_map(data);
+	reverse_t_points_row(data->map);
 	draw_map(data);
 	//draw_first_row(data, data->map->points);	
 }

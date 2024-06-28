@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:42:48 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/04 21:15:33 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/28 04:25:34 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void	draw_pixel_w_brightness(int x, int y, float brightness, t_data *data)
 {
 	int		color;
 	t_image	*img;
+	size_t	intensity;
 
 	img = data->img;
-	color = 255 * brightness;
+	intensity = (size_t) (255 * brightness);
+	color = (intensity << 24) | intensity << 16 | intensity << 8 | intensity;
 	my_mlx_pixel_put(img, x, y, color);
 }

@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 23:44:31 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/13 01:20:49 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/06/28 04:07:31 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	print_map_points(t_map *map)
 	int	j;
 
 	i = 0;
-	while (i < map->height)
+	while (map->points[i])
 	{
 		j = 0;
-		while (j < map->width)
+		while (map->points[i][j])
 		{
 			print_point_info(map->points[i][j]);
 			ft_printf("\n");
