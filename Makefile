@@ -6,7 +6,7 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 21:20:18 by inazaria          #+#    #+#              #
-#    Updated: 2024/06/29 00:53:10 by inazaria         ###   ########.fr        #
+#    Updated: 2024/08/16 19:16:13 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_FILES_DRAWING	= $(addprefix $(SRC_DRAWING_DIR), $(C_FILES_DRAWING))
 
 SRC_XIAOLIN_WU_DIR		= ./src_drawing/xiaolin_wu/
 C_FILES_XIAOLIN_WU		= xiaolin_wu.c
+C_FILES_XIAOLIN_WU		+= xiaolin_wu_utils.c
 C_FILES_XIAOLIN_WU		+= wu_utils.c
 C_FILES_XIAOLIN_WU		+= swap_wu_values.c
 C_FILES_XIAOLIN_WU		+= re_initialize_wu_values.c

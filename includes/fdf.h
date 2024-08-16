@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/29 00:53:12 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/16 19:26:00 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SCALE 40
 # define OFFSET 100
 # define Z_SCALE 5
+# define ANGLE 0.523598776
 
 # define RED_TXT		"\e[0;31m"
 # define GREEN_TXT		"\e[0;32m"
@@ -68,6 +69,9 @@ typedef struct s_map
 	t_point		***points;
 	int			width;
 	int			height;
+	int			y_scale;
+	int			x_scale;
+	int			z_scale;
 }				t_map;
 
 typedef struct s_image
@@ -97,8 +101,8 @@ void	assign_to_arr(int tab[2], int a, int b);
 void	assign_z_and_wu_z(t_point **point, int z_value);
 */
 
-
 // NEW Parsing Functions
+int		get_scale(t_map *map);
 int		parse_map(t_map *map, char *filepath);
 int		parse_points(t_map *map, char *filepath);
 void	reverse_t_points_row(t_map *map);
@@ -118,7 +122,7 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	draw_on_image(t_data *data);
 void	change_background_color(t_image *img, int color);
 void	draw_pixel_w_brightness(int x, int y, float brightness, t_data *data);
-void	set_isometric_coords(t_point *point, int height, int width);
+void	set_isometric_coords(t_map *map, t_point *point, int height, int width);
 
 // Rotation & translation functions
 void	create_matrix_rotation_x(float matrix[3][3], int angle);
@@ -135,8 +139,9 @@ void	swap_wu_x(t_point *a, t_point *b);
 void	swap_wu_y(t_point *a, t_point *b);
 void	swap_wu_x_with_y(t_point *a, t_point *b);
 void	swap_wu_y_with_x(t_point *a, t_point *b);
-void	draw_AA_line(t_data *data, t_point *p0, t_point *p1);
-void	draw_AA_line_isometric(t_data *data, t_point *p0, t_point *p1);
+void	draw_aa_line(t_data *data, t_point *p0, t_point *p1);
+void	draw_aa_line_isometric(t_data *data, t_point *p0, t_point *p1);
+void	resetting_wu_coords(t_point *p0, t_point *p1);
 
 // Utils Functions
 void	ft_err(char *str);

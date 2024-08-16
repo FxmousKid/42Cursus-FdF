@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:04:08 by inazaria          #+#    #+#             */
-/*   Updated: 2024/05/31 19:30:29 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:59:55 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,4 @@ void	re_init_wu_z(int count, va_list args)
 		point = va_arg(args, t_point *);
 		point->wu_z = point->z;
 	}
-}
-
-void	init_wu_coord(char coord, int count, ...)
-{
-	va_list	args;
-
-	va_start(args, count);
-	if (coord == 'x')
-		re_init_wu_x(count, args);
-	else if (coord == 'y')
-		re_init_wu_y(count, args);
-	else if (coord == 'z')
-		re_init_wu_z(count, args);
-	va_end(args);	
 }

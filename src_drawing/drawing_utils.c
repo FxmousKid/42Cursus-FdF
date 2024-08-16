@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:06:02 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/08 23:53:57 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/05 19:05:53 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	change_t_point_coords(t_point *point, int x, int y, int z)
 {
-	//bzero_t_point(point);
 	point->x = x;
 	point->y = y;
 	point->z = z;

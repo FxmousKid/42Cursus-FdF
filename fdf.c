@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:46:16 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/29 00:10:21 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/10 15:32:47 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,13 @@
 int	make_t_map(t_data *data, char **argv)
 {
 	t_map	*map;
-	
+
 	map = (t_map *) ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		return (ft_err("Failed to calloc t_map\n"), 0);
 	if (!parse_map(map, argv[1]))
 		return (free(map), ft_err("Failed to parse_map()\n"), 0);
 	data->map = map;
-
-	reverse_t_points_row(map);
-
 	return (1);
 }
 
@@ -55,15 +52,15 @@ int	make_t_data(t_data *data, char *argv[])
 	data->mlx_ptr = mlx_init();
 	if (!(data->mlx_ptr))
 		return (free(data), ft_err("Failed to mlx_init()\n"), 0);
+	if (!make_t_map(data, argv))
+		return (quit_mlx(data), ft_err("Failed to make_t_map()\n"), 0);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Fil de Fer");
 	if (!(data->win_ptr))
-		return (quit_mlx(data), ft_err("Failed to mlx_new_window()\n"), 0);
+		return (quit_mlx(data), free_map(data),
+			ft_err("Failed to mlx_new_window()\n"), 0);
 	if (!make_t_image(data))
 		return (quit_win_mlx(data),
 			ft_err("Failed to make_t_image()\n"), 0);
-	if (!make_t_map(data, argv))
-		return (quit_win_mlx_img(data),
-			ft_err("Failed to make_t_map()\n"), 0);
 	return (1);
 }
 
@@ -77,11 +74,7 @@ int	fil_de_fer(char *argv[])
 		return (ft_err("Failed to calloc t_data\n"), 0);
 	if (!make_t_data(data, argv))
 		return (ft_err("Failed to make_t_data()\n"), 0);
-	
-	draw_on_image(data); // add safety check	
-//	print_map_points(data->map);
-	
-
+	draw_on_image(data);
 	mlx_put_image_status = mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->img->image_ptr, 0, 0);
 	if (!mlx_put_image_status)

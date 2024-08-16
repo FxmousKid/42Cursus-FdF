@@ -6,12 +6,11 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:58:32 by inazaria          #+#    #+#             */
-/*   Updated: 2024/06/29 00:53:08 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/16 19:16:33 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 int	verify_map_dimensions(int height_width[2], int fd)
 {
@@ -34,7 +33,6 @@ int	verify_map_dimensions(int height_width[2], int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-
 	return (1);
 }
 
@@ -49,7 +47,7 @@ int	check_and_get_map_dimensions(char *filepath, int height_width[2])
 		return (ft_err("File Incorrectly Formatted !\n"), 0);
 	if (close(fd) < 0)
 		return (ft_err("Failed to Close File !\n"), 0);
-	return (1);	
+	return (1);
 }
 
 int	allocate_points(t_point ***points, t_map *map)
@@ -85,7 +83,7 @@ int	parse_map(t_map *map, char *filepath)
 	height_width[1] = 0;
 	if (!check_and_get_map_dimensions(filepath, height_width))
 		return (ft_err("Failed to check_and_get_map_dimensions()\n"), 0);
-	map->height = height_width[0] - 1; // to avoid extra array of empty points
+	map->height = height_width[0] - 1;
 	map->width = height_width[1];
 	points = (t_point ***) ft_calloc(sizeof(t_point **), map->height + 1);
 	if (!points)
