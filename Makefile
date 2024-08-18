@@ -6,7 +6,7 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 21:20:18 by inazaria          #+#    #+#              #
-#    Updated: 2024/08/16 19:16:13 by inazaria         ###   ########.fr        #
+#    Updated: 2024/08/17 20:26:43 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_FILES_PARSING	= $(addprefix $(SRC_PASRING_DIR), $(C_FILES_PARSING))
 SRC_DRAWING_DIR		= ./src_drawing/
 C_FILES_DRAWING		= drawing.c
 C_FILES_DRAWING		+= drawing_utils.c
+C_FILES_DRAWING		+= reset_drawing.c
 C_FILES_DRAWING		+= rotation_matrixes.c
 C_FILES_DRAWING		+= isometric_projection.c
 SRC_FILES_DRAWING	= $(addprefix $(SRC_DRAWING_DIR), $(C_FILES_DRAWING))

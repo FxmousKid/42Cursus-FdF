@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:44:13 by inazaria          #+#    #+#             */
-/*   Updated: 2024/08/16 19:26:00 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/18 02:19:15 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 
 # define BASE_16_LOWER "0123456789abcdef"
 
-# define WIDTH  1920
-# define HEIGHT	1080
+# define WIDTH  960
+# define HEIGHT	540
 
-# define SCALE 40
-# define OFFSET 100
-# define Z_SCALE 5
+# define SCALE 10
+# define OFFSET 25
+# define Z_SCALE 3
 # define ANGLE 0.523598776
 
 # define RED_TXT		"\e[0;31m"
@@ -72,6 +72,11 @@ typedef struct s_map
 	int			y_scale;
 	int			x_scale;
 	int			z_scale;
+	int			x_offset;
+	int			y_offset;
+	int			scale_add;
+	int			y_offset_add;
+	int			x_offset_add;
 }				t_map;
 
 typedef struct s_image
@@ -122,7 +127,9 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void	draw_on_image(t_data *data);
 void	change_background_color(t_image *img, int color);
 void	draw_pixel_w_brightness(int x, int y, float brightness, t_data *data);
-void	set_isometric_coords(t_map *map, t_point *point, int height, int width);
+void	set_isometric_coords(t_point *point);
+void	reset_drawing(t_data *data);
+int		get_scale_value(t_map *map);
 
 // Rotation & translation functions
 void	create_matrix_rotation_x(float matrix[3][3], int angle);

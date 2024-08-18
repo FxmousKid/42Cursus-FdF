@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 19:06:02 by inazaria          #+#    #+#             */
-/*   Updated: 2024/08/05 19:05:53 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/18 02:18:08 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,25 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 	pixel_addr = img->addr + \
 		(y * img->line_length + x * (img->bits_per_pixel / 8));
 	*((unsigned int *) pixel_addr) = color;
+}
+
+int	get_scale_value(t_map *map)
+{
+	t_point	corners[4];
+	int		dx;
+	int		dy;
+
+	corners[0] = *(map->points[0][0]);
+	corners[1] = *(map->points[0][map->width - 1]);
+	corners[2] = *(map->points[map->height - 1][0]);
+	corners[3] = *(map->points[map->height - 1][map->width - 1]);
+	set_isometric_coords(&corners[0]);
+	set_isometric_coords(&corners[1]);
+	set_isometric_coords(&corners[2]);
+	set_isometric_coords(&corners[3]);
+	dx = WIDTH / (corners[1].wu_x - corners[2].wu_x);
+	dy = HEIGHT / (corners[0].wu_y - corners[3].wu_y);
+	if (dx > dy)
+		return (dx);
+	return (dy);
 }
