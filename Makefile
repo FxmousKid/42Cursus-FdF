@@ -6,7 +6,7 @@
 #    By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 21:20:18 by inazaria          #+#    #+#              #
-#    Updated: 2024/08/17 20:26:43 by inazaria         ###   ########.fr        #
+#    Updated: 2024/08/19 11:23:29 by inazaria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,10 +77,8 @@ END			:= $(shell echo -e "\033[0m")
 .c.o :
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all : display $(NAME)
+all : $(NAME)
 
-display : 
-	@$(CAT) ./REMDINDERS.TXT
 
 $(NAME) : $(OBJ_FILES) mlx libft
 	@$(CC) $(CFLAGS) $(OBJ_FILES) -Lmlx_linux -lmlx -lXext -lX11 -lm -lz libft/libft.a -o $(NAME)
