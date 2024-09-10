@@ -6,7 +6,7 @@
 /*   By: inazaria <inazaria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:46:16 by inazaria          #+#    #+#             */
-/*   Updated: 2024/08/16 20:18:55 by inazaria         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:34:05 by inazaria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	make_t_image(t_data *data)
 			ft_err("Failed to mlx_get_data_addr()\n"), 0);
 	data->img = img;
 	return (1);
+	
+
 }
 
 int	make_t_data(t_data *data, char *argv[])
